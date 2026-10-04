@@ -1,0 +1,113 @@
+# Data Classification Using AI 🌸
+
+**DecodeLabs – AI Project 2**
+
+A beginner-friendly machine learning project that classifies iris flowers into three species using the **K-Nearest Neighbors (KNN)** algorithm. It covers the full classification workflow: data exploration, scaling, train/test splitting, hyperparameter tuning, and model evaluation.
+
+## Pipeline
+
+```
+INPUT (Iris dataset + Scaling) → PROCESS (Split + KNN) → OUTPUT (Confusion Matrix + F1)
+```
+
+1. **Load and explore** the Iris dataset (150 samples, 4 features, 3 classes) and check for missing values, class balance, and summary statistics
+2. **Visualize** feature relationships with a pairplot
+3. **Split** the data 80/20 into train and test sets, with stratification to keep class ratios equal
+4. **Scale** features with `StandardScaler`, fitted on the training data only to avoid data leakage
+5. **Tune K** using 5-fold cross-validation on the training set (K = 1 to 30)
+6. **Train** the KNN model (instantiate → fit → predict)
+7. **Evaluate** with accuracy, macro and weighted F1, a classification report, and a confusion matrix
+8. **Predict** the species of a brand-new flower
+
+## Dataset
+
+The classic [Iris dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html), loaded directly from scikit-learn.
+
+| Feature        | Description              |
+| -------------- | ------------------------ |
+| sepal length   | in cm                    |
+| sepal width    | in cm                    |
+| petal length   | in cm                    |
+| petal width    | in cm                    |
+
+**Classes:** setosa, versicolor, virginica (50 samples each)
+
+## Results
+
+| Metric             | Score  |
+| ------------------ | ------ |
+| Best K (5-fold CV) | 5      |
+| Accuracy           | 0.9333 |
+| F1 (macro)         | 0.9327 |
+
+**Confusion matrix (test set):**
+
+|                 | setosa | versicolor | virginica |
+| --------------- | ------ | ---------- | --------- |
+| **setosa**      | 10     | 0          | 0         |
+| **versicolor**  | 0      | 10         | 0         |
+| **virginica**   | 0      | 2          | 8         |
+
+Setosa is classified perfectly. The only mistakes are two virginica flowers predicted as versicolor, which is expected because those two species overlap the most.
+
+**New flower example:** `[5.9, 3.0, 5.1, 1.8]` → predicted **virginica**
+
+> Results come from `random_state=42`. Your numbers may differ slightly if you change the seed or the split.
+
+## Output Files
+
+| File | Description |
+| ---- | ----------- |
+| `01_pairplot.png` | Pairplot of all features, colored by species |
+| `02_choose_k.png` | Error rate vs. K (the elbow plot) |
+| `03_confusion_matrix.png` | Confusion matrix of the final model |
+
+## Project Structure
+
+```
+Data-Classification-Using-AI/
+├── project2_iris_knn.py
+├── 01_pairplot.png
+├── 02_choose_k.png
+├── 03_confusion_matrix.png
+└── README.md
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.8 or later
+
+### Install dependencies
+
+```bash
+pip install numpy pandas matplotlib seaborn scikit-learn
+```
+
+### Run
+
+```bash
+python project2_iris_knn.py
+```
+
+The script prints the dataset overview, the best K, and the evaluation results, and saves the three plots in the project folder.
+
+## Tech Stack
+
+- Python
+- scikit-learn
+- pandas and NumPy
+- Matplotlib and Seaborn
+
+## Key Concepts Practiced
+
+- Stratified train/test splitting
+- Feature scaling without data leakage
+- Choosing K with cross-validation
+- Evaluating beyond accuracy with a confusion matrix and F1 score
+
+## Author
+
+**Hifza Yasmeen**
+GitHub: [@hifzayasmeen](https://github.com/hifzayasmeen)
